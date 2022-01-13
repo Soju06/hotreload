@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.soju06'
+version '0.0.1'
+
+repositories {
+    maven {
+        url "https://papermc.io/repo/repository/maven-public"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

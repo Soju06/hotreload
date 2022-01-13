@@ -1,0 +1,11 @@
+main: io.github.soju06.hotreload.HotReload
+name: hotreload
+description: plugin Hot reload devTools
+author: soju06
+website: github.com/soju06/hotreload
+version: 0.0.1
+api-version: 1.18
+
+commands:
+  hotreload:
+    description: plugin Hot reload devTools
