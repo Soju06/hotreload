@@ -54,10 +54,14 @@ public class HotReloadUtility {
                     return false;
                 }
             }
-            var files = PluginUtility.getPlugins(file, 0);
+            var files = file.listFiles();
             if (files != null) {
                 var paths = new ArrayList<String>();
-                files.forEach(f->paths.add(f.getPath()));
+                for (File f : files) {
+                    var name = f.getName();
+                    if (f.isDirectory() || (f.isFile() && name.substring(name.lastIndexOf('.') + 1).equals("jar")))
+                        paths.add(f.getPath());
+                }
                 tabs.addAll(ChatUtility.spaceTabComplete(path, paths));
                 return true;
             }

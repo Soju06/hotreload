@@ -44,9 +44,9 @@ public class HotReload extends JavaPlugin {
         Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
             try {
                 var latest = UpdateUtility.getLatest();
-                if (getDescription().getVersion().equals(Objects.requireNonNull(latest))) {
+                if (!getDescription().getVersion().equals(Objects.requireNonNull(latest))) {
                     getLogger().warning("HotReload: The latest version of HotReload has been released!");
-                    getLogger().warning("HotReload: Download from https://github.com/repos/soju06/hotreload/releases/latest/hotreload-" + latest + ".jar");
+                    getLogger().warning("HotReload: Download from https://github.com/Soju06/hotreload/releases/latest/download/hotreload-" + latest + ".jar");
                 }
             } catch (Exception e) {
                 getLogger().warning("HotReload: Update check fail. " + e);
@@ -71,8 +71,6 @@ public class HotReload extends JavaPlugin {
             }
         }
     }
-
-    // 플러그인 로드 안됨
 
     @Override
     public void onDisable() {
