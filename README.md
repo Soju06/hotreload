@@ -38,7 +38,7 @@ Minecraft Plugin DevTools | Auto Reload Plugin
 ## ✔️ Problem solving
 
 ### file have been changed가 출력되었지만  늦게 리로드, 또는 리로드되지 않습니다.
-과부화 방지를 위해 쿨다운 시스템이 있습니다. 약 1초 동인 파일 수정이 없으면 리로드됩니다.
+과부화 방지를 위해 쿨다운 시스템이 있습니다. 약 1초 동안 파일 수정이 없으면 리로드됩니다.
 
 ### 버그를 발견한 경우 / 아이디어 요청
 github issues 페이지에 제보하여주십시오.
