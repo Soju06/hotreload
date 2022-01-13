@@ -24,6 +24,10 @@ Minecraft Plugin DevTools | Auto Reload Plugin
 해당 플러그인은 비공유 개발 용도로 개발되어, 해킹 취약점이 발생할 수 있으므로 신뢰할 수 있는 영역에서만 사용하십시오.
 의도치 않은 엑세스가 발생할 수 있습니다.
 
+## ⬇️ Download!
+
+Download latest version [here](https://github.com/Soju06/hotreload/releases/latest)
+
 ## 🔥 Hot Reload
 해당 플러그인의 핵심 기능입니다.
 지정한 플러그인의 변경 사항이 생기면 리로드 합니다.
