@@ -28,7 +28,7 @@ public class ChatUtility {
     }
 
     public static String getChat(String message, ChatColor color, String sub) {
-        return ChatColor.YELLOW + "[HotReoad" + (sub != null ? " " + sub : "") + "] " +  color + message;
+        return ChatColor.YELLOW + "[HotReload" + (sub != null ? " " + sub : "") + "] " +  color + message;
     }
 
     public static int sendChat(String message) {

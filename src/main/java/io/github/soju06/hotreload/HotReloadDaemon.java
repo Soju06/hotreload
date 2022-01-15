@@ -53,7 +53,7 @@ public class HotReloadDaemon extends WatchDaemon {
         if (!schedule) {
             holdTime = now;
             if (!use) {
-                threadPoolExecutor.getQueue().remove();
+                threadPoolExecutor.getQueue().poll();
                 threadPoolExecutor.schedule(()->hold_run(true),
                         1200, TimeUnit.MILLISECONDS);
             }
