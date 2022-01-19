@@ -61,6 +61,7 @@ public class HotReload extends JavaPlugin {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            if (currentId != threadId || watchManager == null) break;
             for (HotReloadDaemon daemon : watchManager) {
                 try {
                     daemon.watch();

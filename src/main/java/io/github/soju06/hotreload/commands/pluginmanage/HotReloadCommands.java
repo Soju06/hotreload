@@ -7,6 +7,7 @@ import io.github.soju06.hotreload.commands.pluginmanage.subLoader.PluginUnloadSu
 import io.github.soju06.hotreload.commands.pluginmanage.subPlugin.PluginDisableSubCommand;
 import io.github.soju06.hotreload.commands.pluginmanage.subPlugin.PluginEnableSubCommand;
 import io.github.soju06.hotreload.commands.pluginmanage.subPlugin.PluginListSubCommand;
+import io.github.soju06.hotreload.commands.pluginmanage.subSettings.HotreloadSettingsSubCommand;
 import io.github.soju06.hotreload.commands.pluginmanage.subWatch.PluginWatchSubCommand;
 
 public class HotReloadCommands extends RoutedExecuter {
@@ -19,5 +20,6 @@ public class HotReloadCommands extends RoutedExecuter {
         add(new PluginUnloadSubCommand("unload"));
         add(new PluginReloadSubCommand("reload"));
         add(new PluginWatchSubCommand("watch", 0));
+        add(new HotreloadSettingsSubCommand("setting", 0));
     }
 }

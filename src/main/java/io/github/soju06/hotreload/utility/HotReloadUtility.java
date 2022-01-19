@@ -68,4 +68,12 @@ public class HotReloadUtility {
         }
         return false;
     }
+
+    public static int tryParseInt(String value, int defaultVal) {
+        try {
+            return Integer.parseUnsignedInt(value);
+        } catch (NumberFormatException e) {
+            return defaultVal;
+        }
+    }
 }

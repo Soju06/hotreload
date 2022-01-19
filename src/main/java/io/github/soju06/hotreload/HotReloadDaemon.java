@@ -2,21 +2,29 @@ package io.github.soju06.hotreload;
 
 import io.github.soju06.filesystems.watch.WatchDaemon;
 import io.github.soju06.hotreload.utility.ChatUtility;
+import io.github.soju06.hotreload.utility.HotReloadUtility;
 import io.github.soju06.hotreload.utility.PluginUtility;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 
+import javax.annotation.Nullable;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.TimeZone;
+import java.util.UUID;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class HotReloadDaemon extends WatchDaemon {
-    private Date holdTime = new Date(0);
-    private final ScheduledThreadPoolExecutor threadPoolExecutor = new ScheduledThreadPoolExecutor(1);
+    private long holdTime = System.currentTimeMillis();
     private Plugin plugin;
+    private UUID threadId;
     private int reloadCount = 0;
 
     public HotReloadDaemon(Plugin plugin, File file) {
@@ -43,23 +51,27 @@ public class HotReloadDaemon extends WatchDaemon {
     @Override
     public void onModify(File file) {
         if (file.getPath().equals(getPath())) {
-            hold_run(false);
+            hold_run(false, null);
         }
     }
 
-    void hold_run(boolean schedule) {
-        var now = new Date();
-        var use = now.getTime() - holdTime.getTime() >= 1000;
+    void hold_run(boolean schedule, @Nullable UUID threadId) {
+        if (threadId != null && threadId != this.threadId) return;
+        var now = System.currentTimeMillis();
+        var cooldownValue = HotReload.getInstance().getConfig().get("reload-cool-down");
+        var cooldown = (cooldownValue != null ? (cooldownValue instanceof Integer ? (int)cooldownValue : HotReloadUtility.tryParseInt(cooldownValue.toString(), 1)) : 1) * 1000;
+        var hold = now - holdTime;
+        var use = hold >= cooldown;
         if (!schedule) {
+            if (hold >= cooldown * 5.7) use = false;
             holdTime = now;
+            ChatUtility.sendChat(ChatColor.LIGHT_PURPLE + "plug-in files have been changed: " + plugin.getName());
             if (!use) {
-                threadPoolExecutor.getQueue().poll();
-                threadPoolExecutor.schedule(()->hold_run(true),
-                        1200, TimeUnit.MILLISECONDS);
+                var tid = this.threadId = UUID.randomUUID();
+                Bukkit.getScheduler().scheduleSyncDelayedTask(HotReload.getInstance(), ()->hold_run(true, tid), (cooldown + 200) / 50);
             }
         }
 
-        ChatUtility.sendChat(ChatColor.LIGHT_PURPLE + "plug-in files have been changed: " + plugin.getName());
         if (use) {
             try {
                 PluginUtility.unload(plugin);
