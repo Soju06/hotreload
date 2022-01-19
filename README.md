@@ -19,6 +19,8 @@ Minecraft Plugin DevTools | Auto Reload Plugin
 			 - plugin - 플러그인 폴더 안의 플러그인 파일을 선택합니다.
 			 - path - 해당 경로의 플러그인 파일을 선택합니다.
 		 - remove - 리스트에서 플러그인을 제거합니다.
+	- setting - HotReload 설정
+		- cooldown - 파일 변경시 리로드 쿨다운 시간을 변경합니다.
 
 ## ❗ Precautions
 해당 플러그인은 비공유 개발 용도로 개발되어, 해킹 취약점이 발생할 수 있으므로 신뢰할 수 있는 영역에서만 사용하십시오.
